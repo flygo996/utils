@@ -6,9 +6,9 @@
 
 /**
 * 金额的千分位分割
-* @param {Number/String} 金额【整数、分数、整数负数都可以】
-* @param {String} 带分隔符的金额
-* @param {Number} 小数部分，如果为0，则格式化为整数形式，否则格式化为对应n位小数点
+* @param v {Number/String} 金额【整数、分数、整数负数都可以】
+* @param n {Number} 小数位数，如果为0，则格式化为整数形式，否则格式化为对应n位小数点
+* @rerurn {String} 带分隔符的金额
 */
 function format2thousands(v, n = 0) {
   if (isNaN(Number(v))) {

@@ -56,30 +56,7 @@ export function throttle(fn, delay, mustRunDelay, isImmediate = false) {
   }
 }
 
-function throttle(fn, delay) {
-  clearTimeout(timer);
-  timer = setTimeout(() => fn(scale), delay);
-}
-function throttle(fn, delay) {
-  let timer = null
-  return function () {
-    clearTimeout(timer)
-    timer = setTimeout(function () {
-      fn.apply(this, arguments)
-    }, delay)
-  }
-}
-function throttle(fn, delay) {
-  let lastTime = 0
-  return function () {
-    const nowTime = Date.now()
-    if (nowTime - lastTime > delay) {
-      fn.call(this)
-      lastTime = nowTime
-    }
-  }
-}
-function throttle(fn, delay) {
+function debounce(fn, delay) {
   let lastTime = 0
   return function () {
     const nowTime = Date.now()
@@ -288,3 +265,24 @@ Date.prototype.format = function (format) {
   }
   return format;
 };
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function shuffle(_arr) {
+  let arr = _arr.slice()
+  for (let i = 0; i < arr.length; i++) {
+    const j = getRandomInt(0, i)
+    const t = arr[i]
+    arr[i] = arr[j]
+    arr[j] = t
+  }
+  return arr
+}
+
+const arr = [10, 20, 30, 40, 50, 60, 70, 80]
+console.log(arr)
+console.log(shuffle(arr))
+// [10, 20, 30, 40, 50, 60, 70, 80]
+// [20, 50, 70, 80, 40, 10, 30, 60]
