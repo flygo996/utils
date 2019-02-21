@@ -1,8 +1,8 @@
 /*
  * @Author: laifeipeng 
- * @Date: 2019-02-19 15:00:36 
+ * @Date: 2019-02-10 10:00:36 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-20 09:19:36
+ * @Last Modified time: 2019-02-21 12:40:54
  */
 
 /********* 0、准备工作 **********/
@@ -11,11 +11,12 @@ const genArr = length => Array.from({ length }, () => ~~(Math.random() * 100));
 const arr = genArr(6);
 // 彩色打印
 const padZero = n => n < 10 ? ` ${n}` : `${n}`; //因为生成的数组不超过100，最多2位数
-const arrStr = arr => arr.length && arr.reduce((acc, item) => acc + '    ' + padZero(item))
+const arrStr = arr => arr.length ? arr.reduce((acc, item) => acc + '    ' + padZero(item)) : ''
 const logTitle = str => console.log(`%c -------------- ${str} -------------- `, 'color:green');
 const logArr = arr => console.log(`%c 初始数组 ： ${arrStr(arr)} `, 'color:blue');
 const logArr2 = arr => console.log(`%c 排序后数组: ${arrStr(arr)} `, 'color:red');
 const logStep = (i, leftArr, rightArr) => console.log(`%c 第${i}趟排序：%c ${arrStr(leftArr)}    %c${arrStr(rightArr)} `, 'color:green', 'color:red', 'color:blue');
+const logStep2 = (i, leftArr, pivot, rightArr) => console.log(`%c 第${i}趟排序：%c ${arrStr(leftArr)}    %c${pivot}    %c${arrStr(rightArr)} `, 'color:green', 'color:red', 'color:yellow', 'color:blue');
 const logQuickSort = (leftArr, pivot, rightArr) => console.log(`%c 递归排序：%c ${arrStr(leftArr)}    %c${pivot}    %c${arrStr(rightArr)} `, 'color:green', 'color:red', 'color:yellow', 'color:blue');
 
 
@@ -88,12 +89,13 @@ const selectionSort = arr => {
 }
 selectionSort(arr);
 
-/********* 4、插入排序 **********/
+/********* 4、直接插入排序 **********/
 const insertSort = arr => {
   const list = arr.slice(); //保证函数为纯函数
   const len = list.length;
-  logTitle('4、插入排序')
+  logTitle('4、直接插入排序')
   logArr(list)
+  logStep(0, list.slice(0, 1), list.slice(1))
   for (let i = 1; i < len; i++) {
     const tmp = list[i];
     let j = i - 1;
@@ -102,30 +104,134 @@ const insertSort = arr => {
       j--;
     }
     list[j + 1] = tmp;
-    i - 1 && logStep(i, list.slice(0, i), list.slice(i))//去除i==1
+    logStep(i, list.slice(0, i + 1), list.slice(i + 1))
   }
   logArr2(list)
   return list;
 }
 insertSort(arr);
 
-/********* 5、快速排序 **********/
-logTitle('5、快速排序')
-logArr(arr)
-function quickSort(arr) {
-  const list = arr.slice(); //为了保证这个函数是纯函数，拷贝一次数组
+
+/********* 5、二分插入排序 **********/
+const insertSort2 = arr => {
+  const list = arr.slice(); //保证函数为纯函数
+  const len = list.length;
+  logTitle('5、二分插入排序')
+  logArr(list)
+  logStep(0, list.slice(0, 1), list.slice(1))
+  for (let i = 1; i < len; i++) {
+    const tmp = list[i];
+    let low = 0;
+    let high = i - 1;
+    let j = i - 1;
+    while (low <= high) {
+      const mid = ~~((low + high) / 2);
+      if (tmp < list[mid]) {
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
+    }
+    while (j > high) {
+      list[j + 1] = list[j];
+      j--;
+    }
+    list[j + 1] = tmp;
+    logStep(i, list.slice(0, i + 1), list.slice(i + 1))
+  }
+  logArr2(list)
+  return list;
+}
+insertSort2(arr);
+
+/********* 6、快速排序 **********/
+const quickSort1 = arr => {
+  const list = arr.slice(); //为了保证这个函数是纯函数，拷贝一次数组  
   if (list.length <= 1) return list;
-  const pivot = list.splice(0, 1)[0]; //选第一个作为基数
+  const pivot = list.splice(0, 1)[0]; //选第一个作为基数，并把基数从数组里面删除
   const left = [];
   const right = [];
-  for (let i = 0, len = list.length; i < len; i++) {
+  for (let i = 0, len = list.length; i < len; i++) { //从0开始
     if (list[i] < pivot) {
       left.push(list[i]);
     } else {
       right.push(list[i]);
     }
   }
-  left.length && right.length && logQuickSort(left, pivot, right)
-  return quickSort(left).concat([pivot], quickSort(right))
+  return [...quickSort1(left), pivot, ...quickSort1(right)];
+}
+logTitle('6、快速排序')
+logArr(arr)
+logArr2(quickSort1(arr))
+
+// 上面const pivot = list.splice(0, 1)[0]; 如果想直接改为list[0],那么后面循环的时候要从i=1开始
+const quickSort2 = arr => {
+  const list = arr.slice(); //为了保证这个函数是纯函数，拷贝一次数组
+  if (list.length <= 1) return list;
+  const pivot = list[0]; //选第一个作为基数
+  const left = [];
+  const right = [];
+  for (let i = 1, len = list.length; i < len; i++) { //从1开始
+    if (list[i] < pivot) {
+      left.push(list[i]);
+    } else {
+      right.push(list[i]);
+    }
+  }
+  return [...quickSort2(left), pivot, ...quickSort2(right)];
+}
+
+/********* 7、原地算法快速排序 **********/
+const quickSort = arr => {
+  const list = arr.slice() // 为了保证这个函数是纯函数拷贝一次数组
+  logTitle('7、原地算法快速排序')
+  logArr(list)
+  const sort = (arr, left = 0, right = arr.length - 1) => {
+    if (left >= right) {//如果左边的索引大于等于右边的索引说明整理完毕
+      return;
+    }
+    let i = left;
+    let j = right;
+    const baseVal = arr[j]; // 取无序数组最后一个数为基准值
+    while (i < j) {         //把所有比基准值小的数放在左边大的数放在右边
+      while (i < j && arr[i] <= baseVal) { //找到一个比基准值大的数交换
+        i++;
+      }
+      arr[j] = arr[i];    // 将较大的值放在右边如果没有比基准值大的数就是将自己赋值给自己（i 等于 j）
+      while (j > i && arr[j] >= baseVal) { //找到一个比基准值小的数交换
+        j--;
+      }
+      arr[i] = arr[j]; // 将较小的值放在左边如果没有找到比基准值小的数就是将自己赋值给自己（i 等于 j）
+    }
+    arr[j] = baseVal; // 将基准值放至中央位置完成一次循环（这时候 j 等于 i ）
+    sort(arr, left, j - 1); // 将左边的无序数组重复上面的操作
+    sort(arr, j + 1, right); // 将右边的无序数组重复上面的操作
+  }
+  sort(list);
+  return list;
 }
 logArr2(quickSort(arr))
+
+/********* 8、希尔排序 **********/
+// 排序思路：先将整个待排序记录序列分割成若干个子序列，在序列内分别进行直接插入排序，待整个序列基本有序时，再对全体记录进行一次直接插入排序。
+const shellSort = arr => {
+  const list = arr.slice(); //保证函数为纯函数
+  const len = list.length;
+  logTitle('8、希尔排序')
+  logArr(list)
+  let gap = ~~(len / 2);
+  while (gap > 0) {
+    for (let i = gap; i < len; i++) {
+      const tmp = list[i];
+      let j = i - gap;
+      while (j >= 0 && tmp < list[j]) {
+        list[j + gap] = list[j];
+        j = j - gap;
+      }
+      list[j + gap] = tmp;
+    }
+    gap = ~~(gap / 2);
+  }
+  return list;
+}
+logArr2(shellSort(arr))
