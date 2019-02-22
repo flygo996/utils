@@ -2,8 +2,10 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-17 18:27:19 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-20 09:43:51
+ * @Last Modified time: 2019-02-22 14:33:12
  */
+
+// 优先级由高到低：小括号(xxx) ---> 属性访问.  ---> new foo() ----> foo()
 function Foo() {
   getName = function () { alert(1); };
   return this;
