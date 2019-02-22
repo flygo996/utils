@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-22 14:07:42 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-22 14:30:34
+ * @Last Modified time: 2019-02-22 14:34:44
  */
 function Person(name, age, job) {
   this.name = name;

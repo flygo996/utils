@@ -1,9 +1,11 @@
 /*
  * @Author: laifeipeng 
  * @Date: 2019-02-22 09:17:02 
- * @Last Modified by:   laifeipeng 
- * @Last Modified time: 2019-02-22 09:17:02 
+ * @Last Modified by: laifeipeng
+ * @Last Modified time: 2019-02-22 14:39:12
  */
+// 主要是写关于es6使用let还是const得技巧
+
 // 1、基本数据类型
 const PI = 3.14159265;
 let sum = 0;
