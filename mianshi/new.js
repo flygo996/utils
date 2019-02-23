@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-22 14:07:42 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-22 14:34:44
+ * @Last Modified time: 2019-02-23 20:32:45
  */
 function Person(name, age, job) {
   this.name = name;
@@ -18,7 +18,7 @@ const New = function (P, ...arg) {
   obj.__proto__ = P.prototype;
   P.prototype.constructor = P;
   const rst = P.apply(obj, arg);
-  return typeof rst === 'object' ? rst : obj;
+  return rst instanceof Object ? rst : obj;
 }
 
 // 极简写法

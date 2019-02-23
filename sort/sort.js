@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-20 10:00:36  
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-21 12:34:05
+ * @Last Modified time: 2019-02-23 20:42:57
  */
 
 /********* 1、冒泡排序 **********/
@@ -13,9 +13,7 @@ const bubbleSort = arr => {
   for (let i = 0; i < len; i++) {
     for (let j = len - 1; j > i; j--) {
       if (list[j] < list[j - 1]) {
-        const tmp = list[j - 1];
-        list[j - 1] = list[j];
-        list[j] = tmp;
+        [list[j - 1], list[j]] = [list[j], list[j - 1]];
       }
     }
   }
@@ -31,9 +29,7 @@ const bubbleSort2 = arr => {
     let exchange = false;
     for (let j = len - 1; j > i; j--) {
       if (list[j] < list[j - 1]) {
-        const tmp = list[j - 1];
-        list[j - 1] = list[j];
-        list[j] = tmp;
+        [list[j - 1], list[j]] = [list[j], list[j - 1]];
         exchange = true;
       }
     }
@@ -53,9 +49,7 @@ const selectionSort = arr => {
       if (list[j] < list[k]) k = j;
     }
     if (k !== i) {
-      const tmp = list[k];
-      list[k] = list[i];
-      list[i] = tmp;
+      [list[k], list[i]] = [list[i], list[k]];
     }
   }
   return list;

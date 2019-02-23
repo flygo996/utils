@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-21 17:50:13 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-22 10:14:07
+ * @Last Modified time: 2019-02-23 20:37:56
  */
 
 // 1、判断回文字符串
@@ -40,6 +40,11 @@ function randomString(n) {
     rst += str.charAt(Math.round(Math.random() * str.length));
   }
   return rst;
+}
+function randomString2(n) {
+  const str = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const arr = Array.from({ length: n }, () => str.charAt(Math.round(Math.random() * str.length)));
+  return arr.join('');
 }
 
 // 4、统计字符串中次数最多字母
