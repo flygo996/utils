@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件委托2</title>
+</head>
+
+<body>
+  <h2>不仅要打印Li标签的文本，还要打印出li是第几个</h2>
+  <ul id="list">
+    <li>item1</li>
+    <li>item2</li>
+    <li>item3</li>
+  </ul>
+
+  <script>
+    const ul = document.getElementById("list");
+    // const lis = [...ul.getElementsByTagName("li")];//类数组-->数组
+    ul.addEventListener("click", function (e) {
+      const event = e || window.event;
+      const target = event.target || event.srcElement;
+      if (target.nodeName.toLowerCase() == "li") {
+        const index = lis.findIndex(o => o === target);
+        if(index===-1) console.log('不存在这个li')
+        console.log(`我是第 ${index + 1} 个Li; 我的文本是：${target.innerHTML}`);
+        // 我是第 1 个Li; 我的文本是：item1
+      }
+    })
+    // 下面测试动态增加的节点能否正确委托，可以
+    const newLi = document.createElement("li");
+    const text = document.createTextNode("item4");
+    newLi.appendChild(text);
+    ul.appendChild(newLi);
+    const lis = [...ul.getElementsByTagName("li")];//类数组-->数组
+    </script>
+</body>
+
+</html>
