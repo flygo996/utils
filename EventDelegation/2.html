@@ -29,11 +29,12 @@
         // 我是第 1 个Li; 我的文本是：item1
       }
     })
-    // 下面测试动态增加的节点能否正确委托，可以
+    // 下面测试动态增加的节点能否正确委托，测试后发现可以真确委托
     const newLi = document.createElement("li");
     const text = document.createTextNode("item4");
     newLi.appendChild(text);
     ul.appendChild(newLi);
+    // 把下面这段话从上面移到这里，才能正确获取所有的li
     const lis = [...ul.getElementsByTagName("li")];//类数组-->数组
     </script>
 </body>
