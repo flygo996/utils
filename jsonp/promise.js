@@ -2,7 +2,7 @@
  * @Author: laifeipeng
  * @Date: 2019-02-24 11:05:45
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-24 11:22:27
+ * @Last Modified time: 2019-02-24 11:43:05
  */
 /**
 一句话阐述下JSONP原理：
@@ -53,5 +53,5 @@ function jsonp(url, data) {
 }
 // 测试
 jsonp('http://127.0.0.1:3000/jsonp', { a: 1, b: 'heiheihei' })
-  .then(result => { console.log(result) })
+  .then(res => { console.log(res) })
   .catch(err => { console.error(err) })
