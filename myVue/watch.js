@@ -2,20 +2,20 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 17:50:52 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 17:53:22
+ * @Last Modified time: 2019-02-27 18:32:24
  */
 class Watcher {
-  constructor(vm, exp, cb) {
+  constructor(vm, key, cb) {
     this.cb = cb;
     this.vm = vm;
-    this.exp = exp;
+    this.key = key; //vm.data里面的属性key，对应的是defineReactive(data, key, val)里的data参数
     this.value = this.get();  // 将自己添加到订阅器的操作
   }
   update() {
     this.run();
   }
   run() {
-    const value = this.vm.data[this.exp];
+    const value = this.vm.data[this.key];
     const oldVal = this.value;
     if (value !== oldVal) {
       this.value = value;
@@ -24,7 +24,7 @@ class Watcher {
   }
   get() {
     Dep.target = this;  // 缓存自己
-    const value = this.vm.data[this.exp]  // 强制执行监听器里的get函数
+    const value = this.vm.data[this.key]  // 强制执行监听器里的get函数
     Dep.target = null;  // 释放自己
     return value;
   }
