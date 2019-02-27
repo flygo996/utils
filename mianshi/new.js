@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-22 14:07:42 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-23 20:32:45
+ * @Last Modified time: 2019-02-27 20:10:07
  */
 function Person(name, age, job) {
   this.name = name;
@@ -16,7 +16,6 @@ function Person(name, age, job) {
 const New = function (P, ...arg) {
   const obj = {};
   obj.__proto__ = P.prototype;
-  P.prototype.constructor = P;
   const rst = P.apply(obj, arg);
   return rst instanceof Object ? rst : obj;
 }
@@ -43,3 +42,11 @@ console.log(p.__proto__ === Person.prototype);//true
 console.log(Person.prototype.constructor === Person);//true
 
 // 结论--正确！
+
+
+// 最后，看看Object.create()做了什么
+const a = { name: 'lily', age: 20, say() { console.log('test say()') } };
+const b = Object.create(a);
+b.__proto__ === a; //true
+a.age === b.age; //true
+a.say === b.say; //true
