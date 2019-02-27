@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 18:00:45 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:48:30
+ * @Last Modified time: 2019-02-27 18:51:04
  */
 
 class Compile {
@@ -35,7 +35,7 @@ class Compile {
   compileElement(el) {
     const childNodes = el.childNodes;
     const self = this;
-    [].slice.call(childNodes).forEach(function (node) {
+    [...childNodes].forEach(function (node) {
       const reg = /\{\{(.*)\}\}/;
       const text = node.textContent;
 
