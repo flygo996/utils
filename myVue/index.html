@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MyVue</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{title}}</h2>
+    <input type="text" v-model="name">
+    <p>{{name}}</p>
+    <button v-on:click="resetName">重置</button>
+  </div>
+  <script src="./Observer.js"></script>
+  <script src="./Watch.js"></script>
+  <script src="./Compiler.js"></script>
+  <script src="./MyVue.js"></script>
+  <script>
+    new MyVue({
+      el: '#app',
+      data: {
+        title: '赖斐鹏的MyVue！',
+        name: 'laifeipeng'
+      },
+      methods: {
+        resetName() {
+          this.name = 'laifeipeng'
+        }
+      }, mounted() {
+        setTimeout(() => {
+          this.title = '欢迎，赖斐鹏！'
+        }, 1000)
+      }
+    })
+  </script>
+</body>
+
+</html>
