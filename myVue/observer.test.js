@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 17:20:18 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:15:39
+ * @Last Modified time: 2019-02-27 18:17:35
  */
 // Observer是一个数据监听器，其实现核心方法就是Object.defineProperty( )。
 // 如果要对所有属性都进行监听的话，那么可以通过递归方法遍历所有属性值，并对其进行Object.defineProperty( )处理。
@@ -17,10 +17,10 @@ function defineReactive(data, key, val) {
     },
     set(newVal) {
       if (val === newVal) {
-        // return;
+        return;
       }
       val = newVal;
-      console.log(`属性${key}已经被监听，现在值为“${newVal}”。`);
+      console.log(`属性${key}已经被监听，新值为“${newVal}”。`);
     }
   });
 }
