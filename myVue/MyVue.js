@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 18:03:31 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:06:53
+ * @Last Modified time: 2019-02-27 18:35:47
  */
 
 class MyVue {
@@ -19,6 +19,7 @@ class MyVue {
     options.mounted.call(this); // 所有事情处理好后执行mounted函数
   }
 
+  // 把vm.data.xx挂载到vm，这样就可以直接通过vm.xx来访问数据
   proxyKeys(key) {
     const self = this;
     Object.defineProperty(this, key, {
