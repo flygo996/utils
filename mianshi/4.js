@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 09:55:48 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 12:48:06
+ * @Last Modified time: 2019-02-27 12:49:51
  */
 
 // 函数的声明比变量的声明的优先级要高
@@ -50,7 +50,7 @@ function test2() {
   console.log(c);                 //打印出c的函数体 
 
   console.log(d);
-  var d = function d() { }
+  var d = function d() { }        //undefined
   var d = 12
   console.log(d);                //12
 }
