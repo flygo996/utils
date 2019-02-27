@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 18:00:45 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:03:02
+ * @Last Modified time: 2019-02-27 18:48:30
  */
 
 class Compile {
@@ -23,8 +23,8 @@ class Compile {
     }
   }
   nodeToFragment(el) {
-    var fragment = document.createDocumentFragment();
-    var child = el.firstChild;
+    const fragment = document.createDocumentFragment();
+    let child = el.firstChild;
     while (child) {
       // 将Dom元素移入fragment中
       fragment.appendChild(child);
@@ -33,11 +33,11 @@ class Compile {
     return fragment;
   }
   compileElement(el) {
-    var childNodes = el.childNodes;
-    var self = this;
+    const childNodes = el.childNodes;
+    const self = this;
     [].slice.call(childNodes).forEach(function (node) {
-      var reg = /\{\{(.*)\}\}/;
-      var text = node.textContent;
+      const reg = /\{\{(.*)\}\}/;
+      const text = node.textContent;
 
       if (self.isElementNode(node)) {
         self.compile(node);
@@ -51,13 +51,13 @@ class Compile {
     });
   }
   compile(node) {
-    var nodeAttrs = node.attributes;
-    var self = this;
+    const nodeAttrs = node.attributes;
+    const self = this;
     Array.prototype.forEach.call(nodeAttrs, function (attr) {
-      var attrName = attr.name;
+      const attrName = attr.name;
       if (self.isDirective(attrName)) {
-        var exp = attr.value;
-        var dir = attrName.substring(2);
+        const exp = attr.value;
+        const dir = attrName.substring(2);
         if (self.isEventDirective(dir)) {  // 事件指令
           self.compileEvent(node, self.vm, exp, dir);
         } else {  // v-model 指令
@@ -68,31 +68,31 @@ class Compile {
     });
   }
   compileText(node, exp) {
-    var self = this;
-    var initText = this.vm[exp];
+    const self = this;
+    const initText = this.vm[exp];
     this.updateText(node, initText);
     new Watcher(this.vm, exp, function (value) {
       self.updateText(node, value);
     });
   }
   compileEvent(node, vm, exp, dir) {
-    var eventType = dir.split(':')[1];
-    var cb = vm.methods && vm.methods[exp];
+    const eventType = dir.split(':')[1];
+    const cb = vm.methods && vm.methods[exp];
 
     if (eventType && cb) {
       node.addEventListener(eventType, cb.bind(vm), false);
     }
   }
   compileModel(node, vm, exp, dir) {
-    var self = this;
-    var val = this.vm[exp];
+    const self = this;
+    const val = this.vm[exp];
     this.modelUpdater(node, val);
     new Watcher(this.vm, exp, function (value) {
       self.modelUpdater(node, value);
     });
 
     node.addEventListener('input', function (e) {
-      var newValue = e.target.value;
+      const newValue = e.target.value;
       if (val === newValue) {
         return;
       }

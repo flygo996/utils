@@ -2,13 +2,13 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 17:50:52 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:32:24
+ * @Last Modified time: 2019-02-27 18:43:05
  */
 class Watcher {
   constructor(vm, key, cb) {
     this.cb = cb;
     this.vm = vm;
-    this.key = key; //vm.data里面的属性key，对应的是defineReactive(data, key, val)里的data参数
+    this.key = key;           // vm.data里面的属性xxx
     this.value = this.get();  // 将自己添加到订阅器的操作
   }
   update() {

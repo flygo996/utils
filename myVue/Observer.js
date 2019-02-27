@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-02-27 17:20:18 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-02-27 18:08:29
+ * @Last Modified time: 2019-02-27 18:43:58
  */
 
 class Dep {
@@ -18,7 +18,7 @@ class Dep {
     });
   }
 }
-Dep.target = null;
+Dep.target = null; // 定义一个类属性，缓存要watch的对象
 
 class Observer {
   constructor(data) {
