@@ -23,3 +23,11 @@ Vue.prototype.$mount = function (el, hydrating) {
     el = el && inBrowser ? query(el) : undefined;
     return mountComponent(this, el, hydrating)
 };
+
+/*
+model() -->
+genCheckboxModel() + genRadioModel + genSelect()+ genDefaultModel()
+genAssignmentCode() -->
+parseModel() --> parseString()+parseBracket()-> parseString()
+
+ */
