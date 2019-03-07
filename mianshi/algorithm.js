@@ -3,7 +3,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-03-07 15:10:15 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-03-07 17:47:31
+ * @Last Modified time: 2019-03-07 17:49:44
  */
 
 
@@ -81,6 +81,8 @@ function confirmEnding(str, target) {
 
 confirmEnding("He has to give me a new name", "name");// true
 confirmEnding("He has to give me a new name", "new"); // false
+
+
 /************************************************************************** */
 // 7 重复字符串指定次数
 // Repeat a string repeat a string
@@ -106,6 +108,7 @@ function truncate(str, num) {
 truncate("Absolutely Longer", 2); //'Ab...'
 truncate("Absolutely Longer", 20); //'Absolutely Longer'
 truncate("Absolutely Longer", 10); //'Absolut...'
+
 /************************************************************************** */
 // 指定数目 分割数组 
 // Chunky Monkey
@@ -118,6 +121,7 @@ function chunk(arr, size) {
 }
 
 chunk(["a", "b", "c", "d", "e"], 2); // [ [ 'a', 'b' ], [ 'c', 'd' ], [ 'e' ] ]
+
 /************************************************************************** */
 // 实现两个数字之间所有数字的和
 // Sum All Numbers in a Range
@@ -125,10 +129,6 @@ chunk(["a", "b", "c", "d", "e"], 2); // [ [ 'a', 'b' ], [ 'c', 'd' ], [ 'e' ] ]
 function sumAll(a, b) {
   return (a + b) * (Math.abs(a - b) + 1) / 2; //（a + b）×（b - a + 1）÷2
 }
-
-/************************************************************************** */
-// 数字转换成罗马数字
-// Roman Numeral Converter
 
 /************************************************************************** */
 // 替换字符串中指定字符
@@ -146,6 +146,7 @@ myReplace("A quick brown fox jumped over the lazy dog", "Jumped", "leaped");
 // 'A quick brown fox jumped over the lazy dog'
 myReplace("A quick brown fox Jumped over the lazy dog", "Jumped", "leaped");
 // 'A quick brown fox Leaped over the lazy dog'
+
 /************************************************************************** */
 // 字母序列中找到缺失的字母并返回它,如果所有字母都在序列中，返回 undefined
 // 遍历字符串，如果前一个字符的ASCII码不是后一个字符ASCII码+1，就判断为丢失字符，返回丢失的字符。
@@ -166,6 +167,7 @@ fearNotLetter("abce"); // d
 fearNotLetter("abcg"); // def
 fearNotLetter("acg"); // bdef
 fearNotLetter("abc"); // undefined
+
 /************************************************************************** */
 // 将字符串中的字符 &、<、>、" （双引号）, 以及 ' （单引号）转换为它们对应的 HTML 实体。
 // 简单粗暴法
@@ -198,6 +200,7 @@ function convert(str) {
   return rst.join(" ");
 }
 convert("Dolce & Gabbana"); //'Dolce &amp; Gabbana'
+
 /************************************************************************** */
 // 将字符串转换为 spinal case。Spinal case 是 
 // all-lowercase-words-joined-by-dashes 这种形式的，也就是以连字符连接所有小写单词。
@@ -211,6 +214,7 @@ function spinalCase(str) {
 spinalCase('This Is Spinal Tap'); // 'this-is-spinal-tap'
 spinalCase('ThisIsSpinalTap'); // 'this-is-spinal-tap'
 spinalCase('This_Is_Spinal_Tap'); // 'this-is-spinal-tap'
+
 /************************************************************************** */
 // 求小于等于给定数值的所有质数之和。
 // Sum All Primes
@@ -230,9 +234,11 @@ function sumPrimes(num) {
       sum += i;
     }
   }
-  return arr
+  // return arr
+  return sum
 }
 sumPrimes(10)//17
+
 /************************************************************************** */
 
 // .写一个 function，它遍历数组 arr，并返回数组中第一个满足 func 返回值的元素。
@@ -245,6 +251,7 @@ function findElement(arr, func) {
 }
 findElement([1, 3, 5, 8, 9, 10], (num) => num % 2 === 0); // 8 
 findElement([1, 3, 5, 8, 9, 10], (num) => !(num % 2)); // 8
+
 /************************************************************************** */
 
 // 对嵌套的数组进行扁平化处理
@@ -263,6 +270,7 @@ function steamroller(arr) {
 
 steamroller([1, [2], [3, [[4]]]]); // [ 1, 2, 3, 4 ]
 steamroller([[["a"]], [["b"]]]); // [ 'a', 'b' ]
+
 /************************************************************************** */
 
 // 传入二进制字符串，翻译成英语句子并返回。
@@ -282,6 +290,7 @@ function binaryAgent(str) {
 }
 binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 // 'Aren\'t bonfires fun!?'
+
 /************************************************************************** */
 
 // 创建两个参数之和func 如果只提供了一个参数，则返回一个函数，这个函数与原来的函数功能要一样;
@@ -312,3 +321,5 @@ add(); // undefined
 add(2); // [Function]
 add(2,3); // 5
 add(2)(3); // 5
+
+/************************************************************************** */
