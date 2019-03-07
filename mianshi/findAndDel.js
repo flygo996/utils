@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-03-06 18:31:39 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-03-07 16:10:28
+ * @Last Modified time: 2019-03-07 16:16:24
  */
 
 // 并集
@@ -76,7 +76,7 @@ console.log(array_diff3(a, b)); // [ 'c', 'd' ]
 console.log(array_diff4(a, b)); // [ 'c', 'd' ]
 
 
-// 1、找到提供的句子中最长的单词，并计算它的长度。
+// 1、找到提供的句子中最长的单词，并计算它的长度。【假设只有1个】
 function findLongestWord(str) {
   // 转化成数组，并对数组中每个元素的字符串长度进行比较，按照字符串长度由大至小排列数组顺序。
   const arr = str.split(" ").sort(function (a, b) {
@@ -90,12 +90,9 @@ findLongestWord("The quick brown fox jumped over the lazy dog");  //结果：6
 
 // 2\确保字符串的每个单词首字母都大写，其余部分小写。
 function titleCase(str) {
-  var astr = str.toLowerCase().split(" ");
-  for (var i = 0; i < astr.length; i++) {
-    astr[i] = astr[i][0].toUpperCase() + astr[i].substring(1, astr[i].length);
-  }
-  var string = astr.join(" ");
-  return string;
+  return str.toLowerCase().split(" ").map((item) => {
+    return item.replace(item.charAt(0), item[0].toUpperCase())
+  }).join(" ")
 }
 titleCase("I'm a little tea pot");  //结果：I'm A Little Tea Pot
 
