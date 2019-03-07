@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-03-06 18:31:39 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-03-06 18:59:00
+ * @Last Modified time: 2019-03-07 16:10:28
  */
 
 // 并集
@@ -78,16 +78,12 @@ console.log(array_diff4(a, b)); // [ 'c', 'd' ]
 
 // 1、找到提供的句子中最长的单词，并计算它的长度。
 function findLongestWord(str) {
-  //转化成数组
-  var astr = str.split(" ");
-  //对数组中每个元素的字符串长度进行比较，按照字符串长度由大至小排列数组顺序。
-  var bstr = astr.sort(function (a, b) {
+  // 转化成数组，并对数组中每个元素的字符串长度进行比较，按照字符串长度由大至小排列数组顺序。
+  const arr = str.split(" ").sort(function (a, b) {
     return b.length - a.length;
   });
-  //取出数组中第一个元素(也就是最大长度的字符串）
-  var lenMax = bstr[0].length;
-  //返回长度值
-  return lenMax;
+  //取出数组中第一个元素(也就是最大长度的字符串）的长度，并返回
+  return arr[0].length;
 }
 
 findLongestWord("The quick brown fox jumped over the lazy dog");  //结果：6
