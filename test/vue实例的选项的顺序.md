@@ -1,0 +1,21 @@
+https://cn.vuejs.org/v2/style-guide/#组件-实例的选项的顺序-推荐
+- `vue` 实例的选项的顺序
+  - `name`
+  - `components、directives、filters`
+  - `extends、mixins`
+  - `props`
+  - `data、computed、watch`
+  - 生命周期钩子(常用的3个：`created、mounted、destroyed`)
+  - `methods`
+  - `template、render`（我一般不用~）
+- 元素、组件的特性的顺序
+  - `is`
+  - `v-for`
+  - `v-if、v-else、v-else-if、v-show、v-cloak`
+  - `v-pre、v-once`
+  - `id`
+  - `ref、key、slot`
+  - `v-model`
+  - 其它特性 (所有普通的绑定或未绑定的特性)
+  - `v-on`
+  - `v-html、v-text`
