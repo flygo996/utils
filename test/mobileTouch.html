@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>移动端触摸事件顺序</title>
+</head>
+
+<body>
+  <div class="box">我是box!</div>
+  <script>
+    window.onload = function () {
+      var box = document.querySelector('.box');
+      // touchstart
+      box.addEventListener('touchstart', function () {
+        console.log('touchstart');
+      })
+      // touchmove
+      box.addEventListener('touchmove', function () {
+        console.log('touchmove');
+      })
+      // touchend
+      box.addEventListener('touchend', function () {
+        console.log('touchend');
+      })
+      // touchcancel
+      box.addEventListener('touchcancel', function () {
+        console.log('cancel');
+      })
+      // mousedown
+      box.addEventListener('mousedown', function () {
+        console.log('mousedown');
+      })
+      // mouseup
+      box.addEventListener('mouseup', function () {
+        console.log('mouseup');
+      })
+      // click
+      box.addEventListener('click', function () {
+        console.log('click');
+      })
+    }
+// 点击
+// touchstart
+// touchend
+// mousedown
+// mouseup
+// click
+
+// 长按
+// touchstart
+// touchmove * N
+// touchend
+  </script>
+</body>
+
+</html>
