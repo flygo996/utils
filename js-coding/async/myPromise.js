@@ -1,0 +1,1 @@
+// http://47.98.159.95/my_blog/js-async/006.html#%E7%AE%80%E6%98%93%E7%89%88%E5%AE%9E%E7%8E%B0

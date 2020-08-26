@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .header,
+            .footer {
+                height: 40px;
+                width: 100%;
+                background: red;
+            }
+            .container {
+                min-height: 1.2em;
+                position: relative;
+            }
+
+            .container > div {
+                position: absolute;
+            }
+
+            .middle {
+                left: 200px;
+                right: 250px;
+                background: yellow;
+            }
+
+            .left {
+                left: 0;
+                width: 200px;
+                background: pink;
+            }
+
+            .right {
+                right: 0;
+                width: 250px;
+                background: aqua;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">这里是头部</div>
+        <div class="container">
+            <div class="left">左边</div>
+            <div class="right">右边</div>
+            <div class="middle">中间部分</div>
+        </div>
+        <div class="footer">这里是底部</div>
+    </body>
+</html>
