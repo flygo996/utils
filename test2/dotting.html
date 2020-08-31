@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dotting</title>
+    <style>
+      .dotting:after {
+        content: '';
+        display: inline-block;
+        min-width: 2px;
+        min-height: 2px;
+        box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor; /* for IE9+, ..., 3个点 */
+        animation: dot 4s infinite step-start both; /* for IE10+, ... */
+        /* *zoom: expression(this.innerHTML = '...');  for IE7. 若无需兼容IE7, 此行删除 */
+      }
+
+      @keyframes dot {
+        /* 0个点 */
+        25% {
+          box-shadow: none;
+        }
+        /* 1个点 */
+        50% {
+          box-shadow: 2px 0 currentColor;
+        }
+        /* 2个点 */
+        75% {
+          box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+        }
+        /* 3个点 */
+        100% {
+          box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dotting">lala</div>
+  </body>
+</html>

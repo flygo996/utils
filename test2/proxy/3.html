@@ -1,0 +1,85 @@
+<title>利用Proxy实现一个简化版的MVVM</title>
+<body>
+  <p>
+    参照vue的响应式设计模式，将数据劫持部分的Obejct.defineProperty替换为Proxy即可，其他部分，如compile（编译器没有实现，用写好的html模拟已完成编译），watcher，dep，事件监听等基本保持不变，简单实现代码如下：
+  </p>
+  <!-- html部分 -->
+  <div id="foo"></div>
+  <input type="text" name="" id="bar" />
+  <script>
+    // js部分
+    class Watcher {
+      constructor(cb) {
+        this.cb = cb;
+      }
+      update() {
+        this.cb();
+      }
+    }
+    class Dep {
+      constructor() {
+        this.subs = [];
+      }
+      publish() {
+        this.subs.forEach(item => {
+          item.update && item.update();
+        });
+      }
+    }
+    class MVVM {
+      constructor(data) {
+        let that = this;
+        this.dep = new Dep();
+        this.data = new Proxy(data, {
+          get(obj, key, prox) {
+            that.dep.target && that.dep.subs.push(that.dep.target);
+            return obj[key];
+          },
+          set(obj, key, value, prox) {
+            obj[key] = value;
+            that.dep.publish();
+            return true;
+          },
+        });
+        this.compile();
+      }
+      compile() {
+        let divWatcher = new Watcher(() => {
+          this.compileUtils().div();
+        });
+        this.dep.target = divWatcher;
+        this.compileUtils().div();
+        this.dep.target = null;
+
+        let inputWatcher = new Watcher(() => {
+          this.compileUtils().input();
+        });
+        this.dep.target = inputWatcher;
+        this.compileUtils().input();
+        this.compileUtils().addListener();
+        this.dep.target = null;
+      }
+      compileUtils() {
+        let that = this;
+        return {
+          div() {
+            document.getElementById('foo').innerHTML = that.data.foo;
+          },
+          input() {
+            document.getElementById('bar').value = that.data.bar;
+          },
+          addListener() {
+            document.getElementById('bar').addEventListener('input', function () {
+              that.data.bar = this.value;
+            });
+          },
+        };
+      }
+    }
+    const mvvm = new MVVM({ foo: 'foo233', bar: 'bar233' });
+  </script>
+  <p>
+    let mvvm = new MVVM({foo: 'foo233', bar: 'bar233'})
+    通过mvvm.data.foo或者mvvm.data.bar可以操作数据，可以观察到view做出了改变；在输入框改变输入值，也可以通过mvvm.data观察到数据被触发改变
+  </p>
+</body>

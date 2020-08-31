@@ -2,48 +2,42 @@
 
 export default class Storage {
   constructor() {
-    this.ls = window.localStorage;
-    this.ss = window.sessionStorage;
+    this.ls = window.localStorage
+    this.ss = window.sessionStorage
   }
-  /*-----------------cookie---------------------*/
-  /*设置cookie*/
-  setCookie(name, value, day = 1, options) {
-    var setting = arguments[0];
-    var oDate;
-    var path = options.path ? ';path=' + options.path : '';
-    var domain = options.domain ? ';domain=' + options.domain : '';
-    var secure = options.secure ? ';secure' : '';
-    if (Object.prototype.toString.call(setting).slice(8, -1) === 'Object') {
-      for (var i in setting) {
-        oDate = new Date();
-        oDate.setDate(oDate.getDate() + day);
-        document.cookie = i + '=' + setting[i] + ';expires=' + oDate + path + domain + secure;
-      }
-    } else {
-      oDate = new Date();
-      oDate.setDate(oDate.getDate() + day);
-      document.cookie = name + '=' + value + ';expires=' + oDate + path + domain + secure;
-    }
+  /* -----------------cookie--------------------- */
+  /* 设置cookie */
+  // expires: 设置过期时间，单位min，默认10分钟
+  setCookie(name, value, expires = 10) {
+    const exp = new Date()
+    exp.setTime(exp.getTime() + expires * 60 * 1000)
+    document.cookie = `${name}=${escape(value)};expires=${exp.toGMTString()}`
   }
-  /*获取cookie*/
+  /* 获取cookie */
+  // 注意：过期后，得到的cookie为 null
   getCookie(name) {
-    var arr = document.cookie.split('; ');
-    for (var i = 0; i < arr.length; i++) {
-      var arr2 = arr[i].split('=');
-      if (arr2[0] == name) {
-        return arr2[1];
-      }
+    let arr
+    const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`)
+
+    if ((arr = document.cookie.match(reg))) {
+      return unescape(arr[2])
+    } else {
+      return null
     }
-    return '';
   }
-  /*删除cookie*/
+  /* 删除cookie */
   removeCookie(name) {
-    this.setCookie(name, 1, -1);
+    const exp = new Date()
+    exp.setTime(exp.getTime() - 1)
+    const cval = this.getCookie(name)
+    if (cval != null) {
+      document.cookie = `${name}=${cval};expires=${exp.toGMTString()}`
+    }
   }
-  /*-----------------localStorage---------------------*/
-  /*设置localStorage*/
+  /* -----------------localStorage--------------------- */
+  /* 设置localStorage */
   setLocal(key, val) {
-    var setting = arguments[0];
+    var setting = arguments[0]
     if (Object.prototype.toString.call(setting).slice(8, -1) === 'Object') {
       for (var i in setting) {
         this.ls.setItem(i, JSON.stringify(setting[i]))
@@ -52,23 +46,48 @@ export default class Storage {
       this.ls.setItem(key, JSON.stringify(val))
     }
   }
-  /*获取localStorage*/
+  /* 获取localStorage */
   getLocal(key) {
-    if (key) {return JSON.parse(this.ls.getItem(key))}
-    return null;
+    if (key) {
+      return JSON.parse(this.ls.getItem(key))
+    }
+    return null
   }
-  /*移除localStorage*/
+  /* 移除localStorage*/
   removeLocal(key) {
     this.ls.removeItem(key)
   }
-  /*移除所有localStorage*/
+  /* 移除所有localStorage*/
   clearLocal() {
     this.ls.clear()
   }
-  /*-----------------sessionStorage---------------------*/
-  /*设置sessionStorage*/
+  getLocal3D(fieldName, key, _default = null) {
+    const storageObj = this.ls.getItem(fieldName)
+    if (key === undefined) {
+      return storageObj
+    }
+    if (storageObj === null || JSON.parse(storageObj)[key] === null) {
+      return _default
+    }
+    return JSON.parse(storageObj)[key]
+  }
+  setLocal3D(fieldName, key, value) {
+    let storageObj = this.ls.getItem(fieldName)
+    if (storageObj === null) {
+      storageObj = {}
+    } else {
+      storageObj = JSON.parse(storageObj)
+      if (storageObj[key] === null) {
+        storageObj[key] = {}
+      }
+    }
+    storageObj[key] = value
+    this.ls.setItem(fieldName, JSON.stringify(storageObj))
+  }
+  /* -----------------sessionStorage---------------------*/
+  /* 设置sessionStorage*/
   setSession(key, val) {
-    var setting = arguments[0];
+    var setting = arguments[0]
     if (Object.prototype.toString.call(setting).slice(8, -1) === 'Object') {
       for (var i in setting) {
         this.ss.setItem(i, JSON.stringify(setting[i]))
@@ -77,17 +96,42 @@ export default class Storage {
       this.ss.setItem(key, JSON.stringify(val))
     }
   }
-  /*获取sessionStorage*/
+  /* 获取sessionStorage*/
   getSession(key) {
-    if (key) {return JSON.parse(this.ss.getItem(key))}
-    return null;
+    if (key) {
+      return JSON.parse(this.ss.getItem(key))
+    }
+    return null
   }
-  /*移除sessionStorage*/
+  /* 移除sessionStorage*/
   removeSession(key) {
     this.ss.removeItem(key)
   }
-  /*移除所有sessionStorage*/
+  /* 移除所有sessionStorage*/
   clearSession() {
     this.ss.clear()
+  }
+  getSession3D(fieldName, key, _default = null) {
+    const storageObj = this.ss.getItem(fieldName)
+    if (key === undefined) {
+      return storageObj
+    }
+    if (storageObj === null || JSON.parse(storageObj)[key] === null) {
+      return _default
+    }
+    return JSON.parse(storageObj)[key]
+  }
+  setSession3D(fieldName, key, value) {
+    let storageObj = this.ss.getItem(fieldName)
+    if (storageObj === null) {
+      storageObj = {}
+    } else {
+      storageObj = JSON.parse(storageObj)
+      if (storageObj[key] === null) {
+        storageObj[key] = {}
+      }
+    }
+    storageObj[key] = value
+    this.ss.setItem(fieldName, JSON.stringify(storageObj))
   }
 }

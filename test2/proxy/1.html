@@ -1,0 +1,24 @@
+<body>
+  <input type="text" id="input" />
+  <p id="p"></p>
+  <script>
+    const input = document.getElementById('input');
+    const p = document.getElementById('p');
+    const obj = {};
+    const newObj = new Proxy(obj, {
+      get(target, key, receiver) {
+        console.log(`getting ${key}`);
+        return Reflect.get(target, key, receiver);
+      },
+      set(target, key, value, receiver) {
+        console.log(`setting ${key} = ${value}`);
+        if (key === 'text') {
+          input.value = value;
+          p.innerHTML = value;
+        }
+        return Reflect.set(target, key, value, receiver);
+      },
+    });
+    input.addEventListener('keyup', e => (newObj.text = e.target.value));
+  </script>
+</body>

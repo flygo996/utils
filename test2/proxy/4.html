@@ -1,0 +1,35 @@
+<body>
+  <input id="inp" type="text" oninput="handleChange()" />
+  <div id="app"></div>
+  <script>
+    let inp = document.getElementById('inp');
+    let app = document.getElementById('app');
+
+    let obj = {
+      defaultValue: 'hello world',
+    };
+    let proxy = new Proxy(obj, {
+      get: function (obj, key) {
+        console.log('get');
+        return Reflect.get(obj, key);
+      },
+      set(obj, key, value) {
+        notify();
+        return Reflect.set(obj, key, value);
+      },
+    });
+    window.obj = obj;
+    window.proxy = proxy;
+
+    app.innerHTML = proxy.defaultValue;
+    inp.value = proxy.defaultValue;
+
+    function notify() {
+      app.innerHTML = proxy.defaultValue;
+    }
+
+    function handleChange() {
+      proxy.defaultValue = inp.value;
+    }
+  </script>
+</body>
