@@ -20,10 +20,10 @@ function maxProduct (arr) {
     let t_max = max
     //最大值可以从哪些地方产生：
     // 1. arr[i]  2. min*arr[i] 3.max*arr[i]
-    max = Math.max(Math.max(arr[i], arr[i] * max), min * arr[i])
+    max = Math.max(arr[i], arr[i] * max, min * arr[i])
     //最小值可以从哪些地方产生：
     // 1. arr[i]  2.max*arr[i] 3.min*arr[i]
-    min = Math.min(Math.min(arr[i], arr[i] * min), t_max * arr[i])
+    min = Math.min(arr[i], arr[i] * min, t_max * arr[i])
     res = Math.max(res, max) //更新全局最大值
   }
   return res
