@@ -1,4 +1,4 @@
-// 分别按照二叉树先序，中序和后序打印所有的节点。
+// 分别按照二叉树先序、中序、后序打印所有的节点。
 // 先序： 中左右
 // 中序： 左中右
 // 后序： 左右中
@@ -22,34 +22,34 @@ function threeOrders (root) {
   const pre = []
   const mid = []
   const post = []
-  const preTravel = root => {
+  const preTraversal = root => {
     if (root === null) {
       return null
     }
     pre.push(root.val)
-    preTravel(root.left)
-    preTravel(root.right)
+    preTraversal(root.left)
+    preTraversal(root.right)
   }
 
-  const midTravel = root => {
+  const midTraversal = root => {
     if (root === null) {
       return null
     }
-    midTravel(root.left)
+    midTraversal(root.left)
     mid.push(root.val)
-    midTravel(root.right)
+    midTraversal(root.right)
   }
 
-  const postTravel = root => {
+  const postTraversal = root => {
     if (root === null) {
       return null
     }
-    postTravel(root.left)
-    postTravel(root.right)
+    postTraversal(root.left)
+    postTraversal(root.right)
     post.push(root.val)
   }
-  preTravel(root)
-  midTravel(root)
-  postTravel(root)
+  preTraversal(root)
+  midTraversal(root)
+  postTraversal(root)
   return [pre, mid, post]
 }
