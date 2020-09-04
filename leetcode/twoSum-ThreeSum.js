@@ -13,6 +13,19 @@ const twoSum = function (nums, target) {
 }
 console.log(twoSum([1, 2, 2, 3], 4)) // [ 1, 2 ]
 
+const allTwoSum0 = function (nums, target) {
+  const res = []
+  for (let i = nums.length - 1; i >= 0; i--) {
+    const diff = target - nums[i]
+    const idx = nums.slice(0, i).findIndex(o => o === diff)
+    if (idx > -1) {
+      res.push([i, idx])
+    }
+  }
+  return res
+}
+console.log(allTwoSum0([1, 2, 2, 3], 4)) // [ [ 3, 0 ], [ 2, 1 ] ]
+
 const allTwoSum = function (nums, target) {
   const res = []
   const map = {}
@@ -25,7 +38,7 @@ const allTwoSum = function (nums, target) {
   }
   return res
 }
-console.log(allTwoSum([1, 2, 2, 3], 4)) // [ [ 1, 2 ], [ 0, 3 ] ]
+console.log(allTwoSum([1, 2, 2, 3], 4)) // [ [ 3, 0 ], [ 2, 1 ] ]
 
 const allThreeSum = function (nums, target) {
   const res = []
