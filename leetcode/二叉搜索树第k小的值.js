@@ -9,7 +9,7 @@
     this.right = null;
 } */
 
-//二叉树的中序遍历
+// 二叉树的中序遍历，二叉搜索树的中序遍历正好是升序的！
 function KthNode (pRoot, k) {
   // write code here
   let arr = []
