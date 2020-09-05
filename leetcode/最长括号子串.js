@@ -31,7 +31,7 @@ function longestValidParentheses (s) {
   for (let i = 1; i < s.length; i++) {
     // 如果是'('直接跳过，（此时dp[i]还是为默认值0）
     if (s[i] == ')') {
-      const prev = i - 1 - dp[i - 1] // dp[i-1]是合法的最长长度，i-1前1个，i-1-dp[i-1]是上一个最长合法的前一个
+      const prev = i - 1 - dp[i - 1] // dp[i-1]是合法的最长长度，i-1前1个下标，i-1-dp[i-1]（即prev）是上一个最长合法的前一个下标
       if (prev >= 0 && s[prev] == '(') {
         dp[i] = dp[i - 1] + 2
         if (prev - 1 >= 0) {
