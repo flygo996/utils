@@ -17,14 +17,11 @@ function maxProduct (arr) {
   let max = min
   let res = min //注意：max记录的不是最终的最大值，而是途中每一个选择的最大值，于是需要重新用一个值保存全局最大值。
   for (let i = 1; i < arr.length; i++) {
-    let t_max = max
-    //最大值可以从哪些地方产生：
+    //最大(小)值可以从哪些地方产生：
     // 1. arr[i]  2. min*arr[i] 3.max*arr[i]
-    max = Math.max(arr[i], arr[i] * max, min * arr[i])
-    //最小值可以从哪些地方产生：
-    // 1. arr[i]  2.max*arr[i] 3.min*arr[i]
-    min = Math.min(arr[i], arr[i] * min, t_max * arr[i])
-    res = Math.max(res, max) //更新全局最大值
+    const temp = [arr[i], arr[i] * max, min * arr[i]]
+    ;[max, min] = [Math.max(...temp), Math.min(...temp)]
+    res = Math.max(res, max)
   }
   return res
 }
