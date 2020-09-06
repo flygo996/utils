@@ -9,6 +9,10 @@ function currying (callback, ...initialParam) {
   }
 }
 
+// https://juejin.im/post/6844904000509181965
+const curry = (f, arr = []) => (...args) =>
+  (a => (a.length === f.length ? f(...a) : curry(f, a)))([...arr, ...args])
+
 let currying = (fn, len, ...args) =>
   args.length === len
     ? fn(...args)
