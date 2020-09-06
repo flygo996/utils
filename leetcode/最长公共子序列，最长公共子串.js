@@ -61,13 +61,7 @@ console.log(lcs2('abcda', 'bcdda')) // bcda
 
 // 三、最大公共子串（具体字符）
 function findSubStr (str1, str2) {
-  if (str1.length > str2.length) {
-    var temp = str1
-    str1 = str2
-    str2 = temp
-  }
-  var len1 = str1.length,
-    len2 = str2.length
+  var len1 = str1.length
   for (var j = len1; j > 0; j--) {
     for (var i = 0; i < len1 - j; i++) {
       var current = str1.substr(i, j)
@@ -78,7 +72,7 @@ function findSubStr (str1, str2) {
   }
   return ''
 }
-console.log(findSubStr('aaa3333', 'baa333cc')) // aa333
+console.log(findSubStr('aaa33', 'baa333cc')) // aa333
 console.log(findSubStr('aaaX3333--', 'baa333ccX3333333x')) // X3333
 // 四，最长公共子串
 // 该方法主要用于查找最长公共子串，特别是用于关键词查找和标红：
