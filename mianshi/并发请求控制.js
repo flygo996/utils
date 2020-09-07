@@ -10,27 +10,25 @@ https://juejin.im/post/6844903796506624014 优秀
 const sendRequest = (urls, max, cb) => {
   let finished = 0 // 完成请求的个数
   const total = urls.length
-  const hander = () => {
+  const handler = () => {
     if (urls.length) {
       const url = urls.shift()
       fetch(url)
         .then(() => {
-          finished++
-          hander() // 也可以放在finally里面
+          finished++ // 也可以放在finally里面
+          handler() // 也可以放在finally里面
         })
         .catch(e => {
           throw Error(e)
         })
-        .finally(() => {
-          // 可以放在这里 hander()
-        })
+        .finally(() => {})
     }
     if (finished >= total) {
       typeof cb === 'function' && cb()
     }
   }
   for (let i = 0; i < max; i++) {
-    hander()
+    handler()
   }
 }
 
