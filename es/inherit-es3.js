@@ -2,7 +2,7 @@
  * @Author: laifeipeng 
  * @Date: 2019-03-07 09:20:36 
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2019-03-07 09:28:52
+ * @Last Modified time: 2020-09-07 15:19:07
  */
 // es3
 function Person(name) {
@@ -17,7 +17,7 @@ function Bob() {
   this.hobby = 'Histroy';
 }
 
-function inheritProto(Parent, Child) {
+function inheritProto(Person, Child) {
   var Fn = function () { };
   Fn.prototype = Person.prototype;
   Child.prototype.constructor = Child;
