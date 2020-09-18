@@ -11,14 +11,14 @@ function print (pRoot) {
   if (!pRoot) {
     return []
   }
-  let queue = [pRoot] //将根节点加入到队列中
-  let result = [] //结果数组
+  const queue = [pRoot] //将根节点加入到队列中
+  const result = [] //结果数组
   while (queue.length) {
     const len = queue.length //队列中长度循环一次就得变一次
     const tempArr = [] //存储每层节点值的临时数组，方便一层层打印
     for (let i = 0; i < len; i++) {
       //遍历每层节点
-      let temp = queue.shift()
+      const temp = queue.shift()
       tempArr.push(temp.val)
       if (temp.left) {
         queue.push(temp.left)
