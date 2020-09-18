@@ -53,6 +53,7 @@ _LazyMan.prototype.sleep = function(time) {
 
 _LazyMan.prototype.sleepFirst = function(time) {
     const L = this.queue.length
+    // 加在倒数第二个（最后一个的前面）
     this.queue.splice(L - 1, 0, () => {
         setTimeout(() => {
             console.log('Wake up after ' + time + 's!')

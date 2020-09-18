@@ -20,6 +20,8 @@ class _LazyMan {
         this.name = name
         this.queue = []
         this.init()
+        // 异步化，让其他同步操作先执行
+        // 队列加载好之后的启动开关
         setTimeout(() => {
             this.next()
         }, 0)
