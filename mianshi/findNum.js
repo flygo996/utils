@@ -2,13 +2,13 @@
  * @Author: laifeipeng
  * @Date: 2019-02-20 17:36:01
  * @Last Modified by: laifeipeng
- * @Last Modified time: 2020-09-07 15:06:44
+ * @Last Modified time: 2020-09-18 10:17:59
  */
 // 给一个数组（其元素不重复），求所有元素相加为某个值的2个元素对的下标对
 // eg: [2, 9, 3, 10, 8, 1, 22] 目标值11，有[[0, 1], [2, 4], [3, 5]]
 
 // 本人的实现不仅找出下标组，把对应的元素组也一起返回了，提高函数功能，谁知道后面会不会更改需求呢
-
+// 如果数组原本就有序，可以用这个方法，如果无序，优先使用法二法三
 function findNum (arr, target) {
   const a = arr.slice().sort((a, b) => a - b)
   const len = a.length
@@ -43,7 +43,7 @@ function findNum2 (arr, target) {
   const val = [] //存放最后的下标组
   if (len <= 1) return
   // 注意不是i>=0
-  for (let i = len; i > 0; i--) {
+  for (let i = len - 1; i > 0; i--) {
     const diff = target - arr[i]
     // 从i+1开始查询是否存在diff的值（下标）
     const index = arr.slice(0, i).indexOf(diff)
@@ -59,6 +59,10 @@ function findNum2 (arr, target) {
   }
 }
 
+// 法三
+// 使用map存数据，然后去里面查
+
+
 // 下面是测试
 const arr = [2, 9, 3, 10, 8, 1, 22]
 const target = 11
@@ -66,3 +70,4 @@ console.log(findNum(arr, target))
 console.log(findNum2(arr, target))
 // { key: [ [ 0, 5 ], [ 1, 4 ], [ 2, 3 ] ],
 //   val: [ [ 1, 10 ], [ 2, 9 ], [ 3, 8 ] ] }
+
