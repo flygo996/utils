@@ -1,7 +1,7 @@
 // 千分位符(支持正负数，小数；只有整数部分需要千分位符)
 // 1.正则
 function thousand (num) {
-  const r = /(?<!\.\d+)\B(?=(\d{3})+\b)/g
+  const r = /(?<!\.\d+)\B(?=(\d{3})+\b)/g // (?<!\.\d+)改为(?<!\.)一样的效果
   return String(num).replace(r, ',')
 }
 console.log(thousand(12345678)) // 12,345,678

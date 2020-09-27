@@ -1,3 +1,7 @@
+/*
+原理： 原理很简单，用到了a标签的href及download属性和点击事件。
+*/
+
 //一个对象，存储页面图片数量和下载的数量
 var monitorObj = {
   imgTotal: 0,
