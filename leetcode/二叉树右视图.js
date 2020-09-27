@@ -14,6 +14,7 @@ function rightSideView (root) {
   if (!root) {
     return []
   }
+  // 优化：上面3行可以去掉，因为下面的操作可以包含这个判断
   const res = []
   dfs(root, 0, res)
   return res
