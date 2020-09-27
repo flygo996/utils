@@ -23,6 +23,7 @@ const sendRequest = (urls, max, cb) => {
         })
         .finally(() => {})
     }
+    // 优化：这里可以直接else，这样可以省去下面的if判断，同时也可以少存一个finished变量
     if (finished >= total) {
       typeof cb === 'function' && cb()
     }
