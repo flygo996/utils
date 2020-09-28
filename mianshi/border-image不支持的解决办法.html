@@ -1,0 +1,13 @@
+<h2>border-image不支持渐变色边框的解决办法</h2>
+<p>使用background-image + background-clip 实现</p>
+<div
+  style="
+  width: 100px;
+  height: 100px;
+  border: double 4px transparent;
+  border-radius: 80px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  "
+></div>
