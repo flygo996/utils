@@ -1,3 +1,28 @@
+// 最好的处理
+function diPromiseAll (promises) {
+  const iterator = Symbol.iterator
+  if (!promises[iterator]) return
+  return new Promise((resolve, reject) => {
+    let result = [] // 存放结果
+    let count = 0 // 记录有几个resolved
+    for (let promise of promises) {
+      if (!(promise instanceof Promise)) {
+        promise = Promise.resolve(i)
+      }
+      promise.then(
+        res => {
+          result.push(res)
+          count++
+          count === promises.length && resolve(result) // 判断是否已经完成
+        },
+        err => {
+          reject(err)
+        }
+      )
+    }
+  })
+}
+
 // 1
 /* Promise.all()方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
 Promise.all()方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。
