@@ -3,7 +3,7 @@
 // 例如arr=[-2.5，4，0，3，0.5，8，-1]，子数组[3，0.5，8]累乘可以获得最大的乘积12，所以返回12。
 
 /**
- * 
+ *
  * @param arr double浮点型一维数组
  * @return double浮点型
  */
@@ -47,4 +47,5 @@ function maxSum (arr) {
   return sum
 }
 console.log(maxSum([1, 2, -1, 3, -8, -4])) // 5
-
+console.log(maxSum([-2, 1, -3, 4, -1, 2, 1, -5, -4])) // 6
+console.log(maxSum([-1, -2])) // 0  [说明这个算法是错的！应该输出是-1]
