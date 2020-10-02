@@ -32,9 +32,9 @@ module.exports = {
 
 // 二、最大子段和
 function maxSum (arr) {
-  var current = 0,
-    sum = arr[0] // 不能初始化为0，而要初始化为arr[0]，否则遇到全是负数的数组会得到错误的答案
-  for (var i = 0; i < arr.length; i++) {
+  let current = arr[0]
+  let sum = current // 写成跟上面乘法的一样的
+  for (var i = 1; i < arr.length; i++) {
     if (current > 0) {
       current += arr[i]
     } else {
@@ -43,6 +43,7 @@ function maxSum (arr) {
     if (current > sum) {
       sum = current
     }
+    // 上面这个if语句通常也会写成 sum = Math.max(current, sum)
   }
   return sum
 }
