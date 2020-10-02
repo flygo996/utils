@@ -33,7 +33,7 @@ module.exports = {
 // 二、最大子段和
 function maxSum (arr) {
   var current = 0,
-    sum = 0
+    sum = arr[0] // 不能初始化为0，而要初始化为arr[0]，否则遇到全是负数的数组会得到错误的答案
   for (var i = 0; i < arr.length; i++) {
     if (current > 0) {
       current += arr[i]
@@ -48,4 +48,4 @@ function maxSum (arr) {
 }
 console.log(maxSum([1, 2, -1, 3, -8, -4])) // 5
 console.log(maxSum([-2, 1, -3, 4, -1, 2, 1, -5, -4])) // 6
-console.log(maxSum([-1, -2])) // 0  [说明这个算法是错的！应该输出是-1]
+console.log(maxSum([-3, -1, -2])) // -1
