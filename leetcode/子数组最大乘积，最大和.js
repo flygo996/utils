@@ -34,7 +34,7 @@ module.exports = {
 function maxSum (arr) {
   let current = arr[0]
   let sum = current // 写成跟上面乘法的一样的
-  for (var i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i++) {
     if (current > 0) {
       current += arr[i]
     } else {
