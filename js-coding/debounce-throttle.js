@@ -34,11 +34,10 @@ export function throttle(func, wait = 200, type = 1) {
     return function(...args) {
         if (type === 1) {
             let now = Date.now()
-
             if (now - previous > wait) {
                 func.apply(this, args)
                 previous = now
-            }
+            } 
         } else if (type === 2) {
             if (!timeout) {
                 timeout = setTimeout(() => {

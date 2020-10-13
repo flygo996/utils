@@ -59,7 +59,7 @@ function threeOrders (root) {
  * @param {TreeNode} root
  * @return {arr[]}
  */
-var preorderTraversal = function (root) {
+var preOrderTraversal = function (root) {
   let stack = [root];
   let arr = [];
   while (stack.length > 0) {//循环迭代
