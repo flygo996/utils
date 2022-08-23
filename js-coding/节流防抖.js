@@ -1,4 +1,4 @@
-function debounce (fn, wait) {
+function debounce(fn, wait) {
   let timer = null
   return function (...args) {
     timer && clearTimeout(timer)
@@ -6,7 +6,7 @@ function debounce (fn, wait) {
   }
 }
 // 时间戳版
-function throttle (fn, wait) {
+function throttle(fn, wait) {
   let prev = 0
   return function (...args) {
     const now = Date.now()
@@ -17,14 +17,29 @@ function throttle (fn, wait) {
   }
 }
 // 定时器版
-function throttle (fn, wait) {
+function throttle(fn, wait) {
   let timer = null
   return function (...args) {
-    if (!timer) {
-      timer = setTimeout(() => {
-        timer = null
-        fn.apply(this, args)
-      }, wait)
+    if (timer) {
+      return
     }
+    timer = setTimeout(() => {
+      timer = null
+      fn.apply(this, args)
+    }, wait)
+  }
+}
+// 定时器版2
+function throttle(fn, wait) {
+  let canRun = true
+  return function (...args) {
+    if (!canRun) {
+      return
+    }
+    canRun = false;
+    setTimeout(() => {
+      fnc.apply(this, args);
+      canRun = true;
+    }, wait);
   }
 }

@@ -64,3 +64,27 @@ Function.prototype.myBind = function (context, ...args) {
     return fn.apply(context, [...args, ...newFnArgs])
   }
 }
+Function.prototype.bind2 = function (context) {
+  if (typeof this !== "function") {
+    throw new Error("Function.prototype.bind - what is trying to be bound is not callable");
+  }
+
+  var self = this;
+  var args = Array.prototype.slice.call(arguments, 1);
+
+  var fNOP = function () {};
+
+  var fBound = function () {
+      var bindArgs = Array.prototype.slice.call(arguments);
+      return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+  }
+
+  fNOP.prototype = this.prototype;
+  fBound.prototype = new fNOP();
+  return fBound;
+}
+
+// 作者：王猪猪老婆的老公
+// 链接：https://juejin.im/post/6881474582633512967
+// 来源：掘金
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

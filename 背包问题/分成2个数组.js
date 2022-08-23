@@ -1,6 +1,6 @@
 // https://www.cnblogs.com/z2529827226/p/11625373.html
 
-function findArr (arr) {
+function findArr(arr) {
   const sum = arr.reduce((acc, cur) => ((acc += cur), acc))
   if (sum % 2) {
     return false

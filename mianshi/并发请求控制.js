@@ -10,22 +10,25 @@ https://juejin.im/post/6844903796506624014 优秀
 const sendRequest = (urls, max, cb) => {
   let finished = 0 // 完成请求的个数
   const total = urls.length
+  const results = []
   const handler = () => {
     if (urls.length) {
       const url = urls.shift()
       fetch(url)
-        .then(() => {
+        .then((res) => {
+          results.push(res)
           finished++ // 也可以放在finally里面
           handler() // 也可以放在finally里面
         })
         .catch(e => {
+          results.push(e)
           throw Error(e)
         })
-        .finally(() => {})
+        .finally(() => { })
     }
     // 优化：这里可以直接else，这样可以省去下面的if判断，同时也可以少存一个finished变量
     if (finished >= total) {
-      typeof cb === 'function' && cb()
+      typeof cb === 'function' && cb(results)
     }
   }
   for (let i = 0; i < max; i++) {
@@ -34,7 +37,7 @@ const sendRequest = (urls, max, cb) => {
 }
 
 // 2
-function handleFetchQueue (urls, max, callback) {
+function handleFetchQueue(urls, max, callback) {
   const urlCount = urls.length
   const requestsQueue = []
   const results = []
